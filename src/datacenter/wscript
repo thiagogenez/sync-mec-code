@@ -1,0 +1,89 @@
+## -*- Mode: python; py-indent-offset: 4; indent-tabs-mode: nil; coding: utf-8; -*-
+
+
+def build(bld):
+    module = bld.create_ns3_module('datacenter', ['core'])
+    module.source = [
+		'model/datacenter.cc',
+        #'helper/datacenter-helper.cc',
+        #'helper/fattree/fat-tree-helper.cc',
+        #'helper/fattree/ascii-writer.cc',
+        #'model/fattree/mmpp-application.cc',
+        #'helper/fattree/mmpp-helper.cc',
+        #'model/fattree/cp-net-device.cc',
+        #'model/fattree/qbb-net-device.cc',        
+        #'model/fattree/cn-header.cc',
+        #'model/fattree/rp-net-device.cc',
+        #'model/fattree/pause-header.cc',
+        #'model/fattree/infinite-queue.cc',
+        #'model/fattree/hash-routing/md5sum.cc',
+        #'model/fattree/hash-routing/md5-ft.cc',
+        #'model/fattree/hash-routing/hsieh.c',
+        #'model/fattree/hash-routing/fivetuple.cc',
+        #'model/fattree/hash-routing/hash-routing.cc',
+        #'model/fattree/hash-routing/hash-function-impl.cc',
+        #'model/fattree/ipv4-hash-routing-helper.cc',
+	 'model/dc-vm.cc',
+        'model/dc-vm-hypervisor.cc',
+        'helper/dc-vm-hypervisor-helper.cc',
+        #'helper/dc-middlebox-helper.cc',
+        'model/dc-middlebox.cc',
+        'model/policy-header.cc',
+       # 'helper/dc-traffic-helper.cc',
+        'model/dc-flow.cc',
+        'helper/policy-routing-helper.cc',
+        'model/policy-routing.cc',
+         'helper/dc-fat-tree-helper.cc',
+         'model/dc-policy.cc',
+        ]
+
+    #module_test = bld.create_ns3_module_test_library('datacenter')
+    #module_test.source = [
+    #    'test/datacenter-test.cc',
+    #    ]
+
+    headers = bld(features='ns3header')
+    headers.module = 'datacenter'
+    headers.source = [
+        'model/datacenter.h',
+        #'helper/datacenter-helper.h',
+        #'helper/fattree/fat-tree-helper.h',
+        #'helper/fattree/ascii-writer.h',	
+        #'model/fattree/mmpp-application.h',
+        #'helper/fattree/mmpp-helper.h',
+       # 'model/fattree/cp-net-device.h',
+        #'model/fattree/qbb-net-device.h',        
+        #'model/fattree/cn-header.h',
+        #'model/fattree/pause-header.h',
+        #'model/fattree/rp-net-device.h',
+        #'model/fattree/infinite-queue.h',
+        #'model/fattree/hash-routing/fivetuple.h',
+        #'model/fattree/hash-routing/md5sum.h',
+        #'model/fattree/hash-routing/md5-ft.h',
+        #'model/fattree/hash-routing/hsieh.h',
+        #'model/fattree/hash-routing/hash-routing.h',
+        #'model/fattree/hash-routing/hash-function-impl.h',
+        #'model/fattree/hash-routing/hash-function-ft.h',
+        #'model/fattree/ipv4-hash-routing-helper.h',
+        'model/dc-vm-hypervisor.h',
+        'helper/dc-vm-hypervisor-helper.h',
+        'model/dc-vm.h',
+        #'helper/dc-middlebox-helper.h',
+        'model/dc-middlebox.h',
+        'model/policy-header.h',
+        #'helper/dc-traffic-helper.h',
+        'model/dc-flow.h',
+        'helper/scene_generator.h',     
+        'helper/policy_log.h', 
+        'helper/policy-routing-helper.h',
+        'model/policy-routing.h',
+        'helper/dc-fat-tree-helper.h',
+        'model/dc-policy.h',
+        'model/dc-stats-tag.h',
+        'model/Bellman-Ford.h',
+        ]
+
+    #if (bld.env['ENABLE_EXAMPLES']):
+    #    bld.recurse('examples')
+
+    bld.ns3_python_bindings()

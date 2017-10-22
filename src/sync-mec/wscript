@@ -1,0 +1,96 @@
+# -*- Mode: python; py-indent-offset: 4; indent-tabs-mode: nil; coding: utf-8; -*-
+
+# def options(opt):
+#     pass
+
+# def configure(conf):
+#     conf.check(mandatory=True, lib='xerces-c', uselib_store='XERCES')
+#     conf.env['xercersc'] = conf.check(mandatory=True, lib='xerces-c', uselib_store='XERCES')
+#     conf.check_nonfatal(header_name='stdint.h', define_name='HAVE_STDINT_H')
+
+
+
+
+
+def build(bld):
+    module = bld.create_ns3_module('sync-mec', ['core','network','datacenter',])
+    module.source = [
+    	'helper/mec-constants-helper.cc',
+        'helper/mec-backhaul-core-helper.cc',
+        'helper/mec-utils-helper.cc',
+        'helper/mec-vm-hypervisor-helper.cc',
+        'helper/mec-policy-routing-helper.cc',
+        'helper/mec-scenario-generator-helper.cc',
+        'helper/mec-sdn-controller-helper.cc',
+        'helper/mec-policy-migration-helper.cc',
+        'helper/mec-v4-ping-helper.cc',
+        'helper/mec-e2e-checker-helper.cc',
+        'helper/mec-logger-helper.cc',
+        'model/mec-e2e-checker.cc',
+        'model/mec-middle-box-container.cc',
+        'model/mec-middle-box.cc',
+        'model/mec-policy-container.cc',
+        'model/mec-policy.cc',
+        'model/mec-flow-container.cc',
+        'model/mec-flow.cc',
+        'model/mec-vm-container.cc',
+        'model/mec-vm.cc',
+        'model/mec-vm-hypervisor.cc',
+        'model/mec-policy-routing.cc',
+        'model/mec-sdn-controller.cc',
+        'model/mec-pair-communication.cc',
+        'model/mec-pair-communication-container.cc',
+        'model/mec-graph.cc',
+        'model/mec-v4-ping.cc',
+        'model/mec-flow-monitor.cc',
+        'model/mec-logger.cc',
+        'model/mec-migrations-stats.cc',
+        'model/mec-real-timer.cc',
+        ]
+
+    module_test = bld.create_ns3_module_test_library('sync-mec')
+    module_test.source = [
+        'test/sync-mec-test-suite.cc',
+        ]
+
+    headers = bld(features='ns3header')
+    headers.module = 'sync-mec'
+    headers.source = [
+		'helper/mec-constants-helper.h',
+		'helper/mec-backhaul-core-helper.h',
+		'helper/mec-utils-helper.h',
+		'helper/mec-vm-hypervisor-helper.h',
+		'helper/mec-policy-routing-helper.h',
+		'helper/mec-scenario-generator-helper.h',
+		'helper/mec-sdn-controller-helper.h',
+		'helper/mec-policy-migration-helper.h',
+		'helper/mec-v4-ping-helper.h',
+		'helper/mec-e2e-checker-helper.h',
+		'helper/mec-logger-helper.h',
+		'model/mec-e2e-checker.h',
+		'model/mec-middle-box-container.h',
+		'model/mec-middle-box.h',
+        'model/mec-policy-container.h',
+        'model/mec-policy.h',
+        'model/mec-flow-container.h',
+        'model/mec-flow.h',
+        'model/mec-vm-container.h',
+        'model/mec-vm.h',
+        'model/mec-vm-hypervisor.h',
+        'model/mec-policy-routing.h',
+        'model/mec-sdn-controller.h',
+        'model/mec-pair-communication.h',
+        'model/mec-pair-communication-container.h',
+        'model/mec-graph.h',
+        'model/mec-v4-ping.h',
+        'model/mec-flow-monitor.h',
+        'model/mec-logger.h',
+        'model/mec-migrations-stats.h',
+        'model/mec-real-timer.h',
+        ]
+
+    if bld.env.ENABLE_EXAMPLES:
+        bld.recurse('examples')
+
+    # bld.ns3_python_bindings()
+
